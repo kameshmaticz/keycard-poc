@@ -5,9 +5,11 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Alert,
+  Button,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -57,7 +59,8 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-
+const [nfc , Setnfc] = useState(false)
+const [nftisNotThere , SetnftisNotThere]=useState(false)
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -77,6 +80,7 @@ function App(): React.JSX.Element {
     try {
       const isSupported = await Keycard.nfcIsSupported();
       if (!isSupported) {
+        SetnftisNotThere(true)
         Alert.alert("NFC is not supported on this device");
         return;
       }
@@ -95,9 +99,36 @@ function App(): React.JSX.Element {
   }
 
 
+  function NotNFC (){
+    return (
+    <View style={backgroundStyle}>
+      NFC is not supported on this device
+</View>
+    )
+  }
+
+  function CheckForNfc(){
+return (
+  <View style={backgroundStyle}>
+  <Text>CHECK</Text>
+  <Button onPress={()=> CheckNftis()}title='CHECK NFC IS WORKING'/>
+  </View>
+)
+  }
+
+  function NfcisEnabled (){
+    return (
+      <View>
+        <Text style={styles.highlight}>Nfc is Enabled </Text>
+      </View>
+    )
+  }
   return (
     <View style={backgroundStyle}>
-      
+      {
+        nfc ? NfcisEnabled() : nftisNotThere ?  NotNFC() : CheckForNfc()
+      }
+     
     </View>
   );
 }
@@ -118,6 +149,7 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+    color : "#FFFFFF"
   },
 });
 
