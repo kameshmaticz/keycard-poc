@@ -1,0 +1,52 @@
+buildscript {
+    ext {
+        buildToolsVersion = "35.0.0"
+        minSdkVersion = 24
+        compileSdkVersion = 35
+        targetSdkVersion = 35
+        ndkVersion = "27.1.12297006"
+        kotlinVersion = "2.0.21"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+    
+    subprojects {
+        afterEvaluate {
+            if (project.hasProperty("android")) {
+                android {
+                    namespace "com.myproject"
+
+                    compileSdkVersion rootProject.ext.compileSdkVersion
+                    buildToolsVersion rootProject.ext.buildToolsVersion
+
+                    defaultConfig {
+                        targetSdkVersion rootProject.ext.targetSdkVersion
+                    }
+
+                    // Speed up Tests Stage
+                    tasks.withType(Test).configureEach {
+                        maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+                        forkEvery = 100
+                        reports.html.required = false
+                        reports.junitXml.required = false
+                    }
+
+                    // Speed up Java Compile Stage
+                    tasks.withType(JavaCompile).configureEach {
+                        options.fork = true
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"
