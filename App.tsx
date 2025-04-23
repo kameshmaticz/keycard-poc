@@ -5,8 +5,9 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
+
 import {
   Alert,
   Button,
@@ -16,6 +17,7 @@ import {
   Text,
   useColorScheme,
   View,
+  NativeEventEmitter
 } from 'react-native';
 
 import {
@@ -26,7 +28,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Keycard from "react-native-status-keycard";
-
+import { DeviceEventEmitter } from 'react-native';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -76,6 +78,90 @@ const [nftisNotThere , SetnftisNotThere]=useState(false)
    */
   const safePadding = '5%';
 
+
+
+let isload = true 
+
+// useEffect(() => {
+//   const onConnected = DeviceEventEmitter.addListener("keyCardOnConnected", () => {
+//     console.log("keycard connected");
+//   });
+
+//   const onDisconnected = DeviceEventEmitter.addListener("keyCardOnDisconnected", () => {
+//     console.log("keycard disconnected");
+//   });
+
+//   const onNFCEnabled = DeviceEventEmitter.addListener("keyCardOnNFCEnabled", () => {
+//     console.log("nfc enabled");
+//   });
+
+//   const onNFCDisabled = DeviceEventEmitter.addListener("keyCardOnNFCDisabled", () => {
+//     console.log("nfc disabled");
+//   });
+
+//   // Cleanup on unmount
+//   return () => {
+//     onConnected.remove();
+//     onDisconnected.remove();
+//     onNFCEnabled.remove();
+//     onNFCDisabled.remove();
+//   };
+// });
+
+const eventEmitter = new NativeEventEmitter(Keycard);
+  useEffect(() => {
+    // stepRef.current = step;
+  console.log('listnginnnn')
+    let onConnectedListener = eventEmitter.addListener('keyCardOnConnected', ()=> console.log("connected"));
+    let onDisconnectedListener = eventEmitter.addListener('keyCardOnDisconnected', () => console.log("keycard disconnected"));
+    let onNFCEnabledListener = eventEmitter.addListener('keyCardOnNFCEnabled', () => console.log("nfc enabled"));
+    let onNFCDisabledListener = eventEmitter.addListener('keyCardOnNFCDisabled', () => console.log("nfc disabled"));
+
+    // if(isload){
+    //   isload = false 
+    //   try {
+        
+    //     const x =  Keycard.init("123456")
+    //     console.log("INII" , x )
+    //   } catch (error) {
+    //     console.log("INITERROR" , error)
+    //   }
+    // }
+//     Keycard.getApplicationInfo("").then(info => console.log(info));
+
+// // If keycard is paired, use pairing key
+// const pairing = "AFFdkP01GywuaJRQkGDq+OyPHBE9nECEDDCfXhpfaxlo";
+// Keycard.getApplicationInfo(pairing).then(info => console.log(info));
+    // if (!didMount.current) {
+    //   didMount.current = true;
+
+    //   const loadData = async () => {
+    //     await Keycard.setPairings(await getPairings());
+    //     await Keycard.setCertificationAuthorities(["029ab99ee1e7a71bdf45b3f9c58c99866ff1294d2c1e304e228a86e10c3343501c"]);
+        
+    //     let tmp = await AsyncStorage.getItem("wallet-key");
+    //     walletKey.current = tmp !== null ? tmp : "";
+    //     tmp = await AsyncStorage.getItem("key-uid");
+    //     keyUID.current = tmp !== null ? tmp : "";
+
+    //     if (walletKey.current) {
+    //       setStep(Step.Home);
+    //     }
+    //   };
+
+    //   loadData().catch(console.log);
+    // }
+
+    return () => {
+      onConnectedListener.remove();
+      onDisconnectedListener.remove();
+      onNFCEnabledListener.remove();
+      onNFCDisabledListener.remove();
+    };
+  });
+
+
+
   async function CheckNftis() {
     try {
       const isSupported = await Keycard.nfcIsSupported();
@@ -87,6 +173,8 @@ const [nftisNotThere , SetnftisNotThere]=useState(false)
       const isEnabled = await Keycard.nfcIsEnabled();
       if (isEnabled) {
         console.log("NFC is enabled");
+    await Keycard.startNFC("Tap your Keycard");
+
         Setnfc(true); // assuming Setnfc is from useState
       } else {
         console.log("NFC is supported but not enabled");
