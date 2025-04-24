@@ -42,6 +42,11 @@ buildscript {
                     tasks.withType(JavaCompile).configureEach {
                         options.fork = true
                     }
+// This tells the Android Asset Packaging Tool (AAPT) to ignore .xsd files during build.
+                      aaptOptions {
+                        ignoreAssetsPattern "!*.xsd"
+                     }
+
 
                 }
             }

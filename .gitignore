@@ -4,8 +4,9 @@
 node_modules
 /*/node_modules
 */node_modules
-
-# Xcode
+*/node_modulesx
+/*/node_modulesx
+node_modulesx
 #
 build/
 *.pbxuser
