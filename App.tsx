@@ -31,29 +31,35 @@ function App(): React.JSX.Element {
   // ✅ Register NFC Event Listeners
   useEffect(() => {
     console.log('🔁 Registering NFC event listeners');
-
-    const onConnected = eventEmitter.addListener('keyCardOnConnected', () => {
-      console.log('🟢 Keycard Connected!');
-      Alert.alert("Keycard Connected");
-    });
-
-    const onDisconnected = eventEmitter.addListener('keyCardOnDisconnected', () => {
-      console.log('🔴 Keycard Disconnected');
-    });
-
-    const onNFCEnabled = eventEmitter.addListener('keyCardOnNFCEnabled', () => {
-      console.log('📶 NFC Enabled');
-    });
-
-    const onNFCDisabled = eventEmitter.addListener('keyCardOnNFCDisabled', () => {
-      console.log('🚫 NFC Disabled');
-    });
-
+  
+    const listeners = [
+      eventEmitter.addListener('keyCardOnConnected', (data) => {
+        console.log('🟢 Keycard Connected!', data);
+        Alert.alert("Keycard Connected");
+      }),
+      
+      eventEmitter.addListener('keyCardOnDisconnected', () => {
+        console.log('🔴 Keycard Disconnected');
+        Alert.alert("Keycard Disconnected");
+      }),
+      
+      eventEmitter.addListener('keyCardOnNFCEnabled', () => {
+        console.log('📶 NFC Enabled');
+      }),
+      
+      eventEmitter.addListener('keyCardOnNFCDisabled', () => {
+        console.log('🚫 NFC Disabled');
+      }),
+      
+      eventEmitter.addListener('keyCardOnError', (error) => {
+        console.error('⚠️ NFC Error:', error);
+        Alert.alert("NFC Error", error.message || "Unknown error");
+      })
+    ];
+  
     return () => {
-      onConnected.remove();
-      onDisconnected.remove();
-      onNFCEnabled.remove();
-      onNFCDisabled.remove();
+      listeners.forEach(listener => listener.remove());
+      Keycard.stopNFC().catch(console.warn);
     };
   }, []);
 
@@ -74,6 +80,10 @@ function App(): React.JSX.Element {
 
       if (isEnabled) {
         await Keycard.startNFC("📲 Tap your Keycard");
+       const dax =  await Keycard.start()
+console.log("dax" , dax)
+        //  console.log(await Keycard.log())
+        //  key
         setNfcEnabled(true);
       } else {
         Alert.alert("ℹ️ Please enable NFC from settings.");

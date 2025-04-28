@@ -12,42 +12,44 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath("com.android.tools.build:gradle:8.3.2") // Added version
+        classpath("com.facebook.react:react-native-gradle-plugin") // Version should be specified
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion") // Use version from ext
+        // Removed compile classpath as it's not valid here
     }
-    
-    subprojects {
-        afterEvaluate {
-            if (project.hasProperty("android")) {
-                android {
-                    namespace "com.myproject"
+}
 
-                    compileSdkVersion rootProject.ext.compileSdkVersion
-                    buildToolsVersion rootProject.ext.buildToolsVersion
+// This should be at the root level, not inside buildscript
+subprojects {
+    afterEvaluate {
+        if (project.hasProperty("android")) {
+            android {
+                namespace "com.myproject"
 
-                    defaultConfig {
-                        targetSdkVersion rootProject.ext.targetSdkVersion
-                    }
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
 
-                    // Speed up Tests Stage
-                    tasks.withType(Test).configureEach {
-                        maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-                        forkEvery = 100
-                        reports.html.required = false
-                        reports.junitXml.required = false
-                    }
+                defaultConfig {
+                    minSdkVersion rootProject.ext.minSdkVersion
+                    targetSdkVersion rootProject.ext.targetSdkVersion
+                }
 
-                    // Speed up Java Compile Stage
-                    tasks.withType(JavaCompile).configureEach {
-                        options.fork = true
-                    }
-// This tells the Android Asset Packaging Tool (AAPT) to ignore .xsd files during build.
-                      aaptOptions {
-                        ignoreAssetsPattern "!*.xsd"
-                     }
+                // Speed up Tests Stage
+                tasks.withType(Test).configureEach {
+                    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+                    forkEvery = 100
+                    reports.html.required = false
+                    reports.junitXml.required = false
+                }
 
+                // Speed up Java Compile Stage
+                tasks.withType(JavaCompile).configureEach {
+                    options.fork = true
+                }
 
+                // This tells the Android Asset Packaging Tool (AAPT) to ignore .xsd files during build.
+                aaptOptions {
+                    ignoreAssetsPattern "!*.xsd"
                 }
             }
         }

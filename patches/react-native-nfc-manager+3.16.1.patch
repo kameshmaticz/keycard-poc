@@ -1,0 +1,486 @@
+diff --git a/node_modules/react-native-nfc-manager/android/build.gradle b/node_modules/react-native-nfc-manager/android/build.gradle
+index e9e5ae1..7899bc0 100644
+--- a/node_modules/react-native-nfc-manager/android/build.gradle
++++ b/node_modules/react-native-nfc-manager/android/build.gradle
+@@ -1,46 +1,44 @@
++// Add this at the very top of the file
+ def safeExtGet(prop, fallback) {
+     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+ }
+ 
+ buildscript {
+-	repositories {
+-		mavenCentral()
+-	}
+-
+-	dependencies {
+-		classpath 'com.android.tools.build:gradle:1.5.0'
+-	}
++    repositories {
++        google()
++        mavenCentral()
++    }
++    dependencies {
++        classpath 'com.android.tools.build:gradle:7.3.1'
++    }
+ }
++
+ apply plugin: 'com.android.library'
+ 
+ android {
+-	compileSdkVersion safeExtGet('compileSdkVersion', 31)
+-
+-	def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+-
+-	if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+-			namespace "community.revteltech.nfc"
+-  }
+-
+-	defaultConfig {
+-		minSdkVersion safeExtGet('minSdkVersion', 16)
+-    	//noinspection OldTargetApi
+-		targetSdkVersion safeExtGet('targetSdkVersion', 27)
+-	}
+-	lintOptions {
+-		abortOnError false
+-	}
++    compileSdkVersion safeExtGet('compileSdkVersion', 33)
++    
++    namespace "community.revteltech.nfc"
++
++    defaultConfig {
++        minSdkVersion safeExtGet('minSdkVersion', 21)
++        targetSdkVersion safeExtGet('targetSdkVersion', 33)
++        buildConfigField "String", "LIBRARY_PACKAGE_NAME", "\"community.revteltech.nfc\""
++    }
++
++    lintOptions {
++        abortOnError false
++    }
+ }
+ 
+ repositories {
+-	mavenCentral()
+-	maven {
+-		// All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+-		url "$rootDir/../node_modules/react-native/android"
+-	}
++    google()
++    mavenCentral()
++    maven {
++        url "$rootDir/../node_modules/react-native/android"
++    }
+ }
+ 
+-
+ dependencies {
+-	implementation 'com.facebook.react:react-native:+'
++    implementation 'com.facebook.react:react-native:+'
+ }
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/results.bin b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/results.bin
+new file mode 100644
+index 0000000..7ed749e
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/results.bin
+@@ -0,0 +1 @@
++o/bundleLibRuntimeToDirDebug
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/com/myproject/BuildConfig.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/com/myproject/BuildConfig.dex
+new file mode 100644
+index 0000000..254c36e
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/com/myproject/BuildConfig.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/JsonConvert$1.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/JsonConvert$1.dex
+new file mode 100644
+index 0000000..c459e96
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/JsonConvert$1.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/JsonConvert.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/JsonConvert.dex
+new file mode 100644
+index 0000000..e773b1c
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/JsonConvert.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/MifareUtil.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/MifareUtil.dex
+new file mode 100644
+index 0000000..1451698
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/MifareUtil.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$1.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$1.dex
+new file mode 100644
+index 0000000..8d6b00d
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$1.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$2.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$2.dex
+new file mode 100644
+index 0000000..d09e6f9
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$2.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$WriteNdefRequest.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$WriteNdefRequest.dex
+new file mode 100644
+index 0000000..9136132
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager$WriteNdefRequest.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager.dex
+new file mode 100644
+index 0000000..7a22a7a
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManager.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManagerPackage.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManagerPackage.dex
+new file mode 100644
+index 0000000..47dc6de
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/NfcManagerPackage.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/TagTechnologyRequest.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/TagTechnologyRequest.dex
+new file mode 100644
+index 0000000..dcedf36
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/TagTechnologyRequest.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/Util.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/Util.dex
+new file mode 100644
+index 0000000..1f36f2b
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/bundleLibRuntimeToDirDebug_dex/community/revteltech/nfc/Util.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/desugar_graph.bin b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/desugar_graph.bin
+new file mode 100644
+index 0000000..9d11ad7
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/350a50f5a10103f37c1d2754fa2e247e/transformed/bundleLibRuntimeToDirDebug/desugar_graph.bin differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/f3f05f96af92a57bd769af57c83f8cc6/results.bin b/node_modules/react-native-nfc-manager/android/build/.transforms/f3f05f96af92a57bd769af57c83f8cc6/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/.transforms/f3f05f96af92a57bd769af57c83f8cc6/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/react-native-nfc-manager/android/build/.transforms/f3f05f96af92a57bd769af57c83f8cc6/transformed/classes/classes_dex/classes.dex b/node_modules/react-native-nfc-manager/android/build/.transforms/f3f05f96af92a57bd769af57c83f8cc6/transformed/classes/classes_dex/classes.dex
+new file mode 100644
+index 0000000..ef80b2c
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/.transforms/f3f05f96af92a57bd769af57c83f8cc6/transformed/classes/classes_dex/classes.dex differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/generated/source/buildConfig/debug/com/myproject/BuildConfig.java b/node_modules/react-native-nfc-manager/android/build/generated/source/buildConfig/debug/com/myproject/BuildConfig.java
+new file mode 100644
+index 0000000..22faa3b
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/generated/source/buildConfig/debug/com/myproject/BuildConfig.java
+@@ -0,0 +1,10 @@
++/**
++ * Automatically generated file. DO NOT MODIFY
++ */
++package com.myproject;
++
++public final class BuildConfig {
++  public static final boolean DEBUG = Boolean.parseBoolean("true");
++  public static final String LIBRARY_PACKAGE_NAME = "com.myproject";
++  public static final String BUILD_TYPE = "debug";
++}
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml b/node_modules/react-native-nfc-manager/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+new file mode 100644
+index 0000000..def73ee
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.myproject" >
++
++    <uses-sdk android:minSdkVersion="24" />
++
++    <uses-permission android:name="android.permission.NFC" />
++
++    <uses-feature
++        android:name="android.hardware.nfc"
++        android:required="false" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json b/node_modules/react-native-nfc-manager/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+new file mode 100644
+index 0000000..6a152e7
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+@@ -0,0 +1,18 @@
++{
++  "version": 3,
++  "artifactType": {
++    "type": "AAPT_FRIENDLY_MERGED_MANIFESTS",
++    "kind": "Directory"
++  },
++  "applicationId": "com.myproject",
++  "variantName": "debug",
++  "elements": [
++    {
++      "type": "SINGLE",
++      "filters": [],
++      "attributes": [],
++      "outputFile": "AndroidManifest.xml"
++    }
++  ],
++  "elementType": "File"
++}
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties b/node_modules/react-native-nfc-manager/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+new file mode 100644
+index 0000000..1211b1e
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+@@ -0,0 +1,6 @@
++aarFormatVersion=1.0
++aarMetadataVersion=1.0
++minCompileSdk=1
++minCompileSdkExtension=0
++minAndroidGradlePluginVersion=1.0.0
++coreLibraryDesugaringEnabled=false
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json b/node_modules/react-native-nfc-manager/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+new file mode 100644
+index 0000000..9e26dfe
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar b/node_modules/react-native-nfc-manager/android/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar
+new file mode 100644
+index 0000000..af773d2
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar b/node_modules/react-native-nfc-manager/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar
+new file mode 100644
+index 0000000..eabd8b7
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt b/node_modules/react-native-nfc-manager/android/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+new file mode 100644
+index 0000000..61f9a37
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+@@ -0,0 +1 @@
++#Thu Apr 24 15:38:02 IST 2025
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+new file mode 100644
+index 0000000..c1314cb
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/build/generated/res/resValues/debug"/></dataSet><mergedItems/></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+new file mode 100644
+index 0000000..2620ca2
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/debug/shaders"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/packageDebugAssets/merger.xml b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+new file mode 100644
+index 0000000..8aa49ed
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!*.xsd"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/assets"/></dataSet><dataSet config="debug" ignore_pattern="!*.xsd"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/debug/assets"/></dataSet><dataSet config="generated" ignore_pattern="!*.xsd"><source path="/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/build/intermediates/shader_assets/debug/compileDebugShaders/out"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/myproject/BuildConfig.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/myproject/BuildConfig.class
+new file mode 100644
+index 0000000..1b10a87
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/myproject/BuildConfig.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/JsonConvert$1.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/JsonConvert$1.class
+new file mode 100644
+index 0000000..9d5b29d
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/JsonConvert$1.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/JsonConvert.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/JsonConvert.class
+new file mode 100644
+index 0000000..c5393b7
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/JsonConvert.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/MifareUtil.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/MifareUtil.class
+new file mode 100644
+index 0000000..9929931
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/MifareUtil.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$1.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$1.class
+new file mode 100644
+index 0000000..6725fdd
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$1.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$2.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$2.class
+new file mode 100644
+index 0000000..9df8ecf
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$2.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$WriteNdefRequest.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$WriteNdefRequest.class
+new file mode 100644
+index 0000000..2deda8b
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager$WriteNdefRequest.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager.class
+new file mode 100644
+index 0000000..a5a681f
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManager.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManagerPackage.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManagerPackage.class
+new file mode 100644
+index 0000000..86d8b7c
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/NfcManagerPackage.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/TagTechnologyRequest.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/TagTechnologyRequest.class
+new file mode 100644
+index 0000000..0c57775
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/TagTechnologyRequest.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/Util.class b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/Util.class
+new file mode 100644
+index 0000000..fdf3387
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/community/revteltech/nfc/Util.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt b/node_modules/react-native-nfc-manager/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+new file mode 100644
+index 0000000..78ac5b8
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+@@ -0,0 +1,2 @@
++R_DEF: Internal format may change without notice
++local
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt b/node_modules/react-native-nfc-manager/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+new file mode 100644
+index 0000000..72be3f0
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+@@ -0,0 +1,18 @@
++1<?xml version="1.0" encoding="utf-8"?>
++2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++3    package="com.myproject" >
++4
++5    <uses-sdk android:minSdkVersion="24" />
++6
++7    <uses-permission android:name="android.permission.NFC" />
++7-->/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:2:5-62
++7-->/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:2:22-59
++8
++9    <uses-feature
++9-->/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:5-82
++10        android:name="android.hardware.nfc"
++10-->/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:19-54
++11        android:required="false" />
++11-->/home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:55-79
++12
++13</manifest>
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml b/node_modules/react-native-nfc-manager/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+new file mode 100644
+index 0000000..def73ee
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.myproject" >
++
++    <uses-sdk android:minSdkVersion="24" />
++
++    <uses-permission android:name="android.permission.NFC" />
++
++    <uses-feature
++        android:name="android.hardware.nfc"
++        android:required="false" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json b/node_modules/react-native-nfc-manager/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+new file mode 100644
+index 0000000..0637a08
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+@@ -0,0 +1 @@
++[]
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt b/node_modules/react-native-nfc-manager/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+new file mode 100644
+index 0000000..08f4ebe
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+@@ -0,0 +1 @@
++0 Warning/Error
+\ No newline at end of file
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/com/myproject/BuildConfig.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/com/myproject/BuildConfig.class
+new file mode 100644
+index 0000000..1b10a87
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/com/myproject/BuildConfig.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/JsonConvert$1.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/JsonConvert$1.class
+new file mode 100644
+index 0000000..9d5b29d
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/JsonConvert$1.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/JsonConvert.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/JsonConvert.class
+new file mode 100644
+index 0000000..c5393b7
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/JsonConvert.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/MifareUtil.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/MifareUtil.class
+new file mode 100644
+index 0000000..9929931
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/MifareUtil.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$1.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$1.class
+new file mode 100644
+index 0000000..6725fdd
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$1.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$2.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$2.class
+new file mode 100644
+index 0000000..9df8ecf
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$2.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$WriteNdefRequest.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$WriteNdefRequest.class
+new file mode 100644
+index 0000000..2deda8b
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager$WriteNdefRequest.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager.class
+new file mode 100644
+index 0000000..a5a681f
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManager.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManagerPackage.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManagerPackage.class
+new file mode 100644
+index 0000000..86d8b7c
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/NfcManagerPackage.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/TagTechnologyRequest.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/TagTechnologyRequest.class
+new file mode 100644
+index 0000000..0c57775
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/TagTechnologyRequest.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/Util.class b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/Util.class
+new file mode 100644
+index 0000000..fdf3387
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_dir/debug/bundleLibRuntimeToDirDebug/community/revteltech/nfc/Util.class differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar
+new file mode 100644
+index 0000000..672545a
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar differ
+diff --git a/node_modules/react-native-nfc-manager/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt b/node_modules/react-native-nfc-manager/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+new file mode 100644
+index 0000000..5446fc6
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+@@ -0,0 +1 @@
++com.myproject
+diff --git a/node_modules/react-native-nfc-manager/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/react-native-nfc-manager/android/build/outputs/logs/manifest-merger-debug-report.txt
+new file mode 100644
+index 0000000..04e2d45
+--- /dev/null
++++ b/node_modules/react-native-nfc-manager/android/build/outputs/logs/manifest-merger-debug-report.txt
+@@ -0,0 +1,26 @@
++-- Merging decision tree log ---
++manifest
++ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:1:1-4:12
++INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:1:1-4:12
++	package
++		INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
++	xmlns:android
++		ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:1:11-69
++uses-permission#android.permission.NFC
++ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:2:5-62
++	android:name
++		ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:2:22-59
++uses-feature#android.hardware.nfc
++ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:5-82
++	android:required
++		ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:55-79
++	android:name
++		ADDED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml:3:19-54
++uses-sdk
++INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
++INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
++	android:targetSdkVersion
++		INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
++	android:minSdkVersion
++		INJECTED from /home/lakshmi-priya/Documents/kamesh/git/keycard-poc/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
+diff --git a/node_modules/react-native-nfc-manager/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/react-native-nfc-manager/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+new file mode 100644
+index 0000000..aa69131
+Binary files /dev/null and b/node_modules/react-native-nfc-manager/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
+diff --git a/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml b/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
+index b0e490f..d8e4259 100644
+--- a/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
++++ b/node_modules/react-native-nfc-manager/android/src/main/AndroidManifest.xml
+@@ -1,5 +1,4 @@
+-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-		  package="community.revteltech.nfc">
++<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+     <uses-permission android:name="android.permission.NFC" />
+     <uses-feature android:name="android.hardware.nfc" android:required="false" />
+ </manifest>
